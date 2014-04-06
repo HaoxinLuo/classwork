@@ -1,0 +1,52 @@
+<!--SVG - scalable vector graphics:illusion of html -->
+
+<html>
+  <head>
+    <style>
+      #s {border: 1px solid;}
+    </style>
+  </head>
+  <body>
+    <svg id="s" height = 400 width=400>
+<!--      <circle id="c1" cx= 100 cy = 100 r=10 fill="red"></circle> -->
+      <!-- can do c1.setAttribute('r',20) and would change r to 20-->
+    </svg>
+    
+    <script>
+
+      var cClicked = function(e){
+      e.preventDefault();
+      var c = this.getAttribute("fill");
+      if (c == "red"){
+      this.setAttribute("fill","green");
+      } else if (c=="green"){
+      this.setAttribute("fill","blue");
+      } else if (c=="blue"){
+      this.remove();
+      }
+      }
+
+      var addCircle = function(s,x,y,r,c){
+      <!-- this don't work cuz namespace var c1 = document.createElement("circle");-->
+      var c1 = document.createElementNS("http://www.w3.org/2000/svg","circle");
+      c1.setAttribute("cx",x);
+      c1.setAttribute("cy",y);
+      c1.setAttribute("r",r);
+      c1.setAttribute("fill",c);
+      s.appendChild(c1);      
+      }
+
+      var clicked=function(e){
+      e.preventDefault();
+      if (e.toElement!=this){return;}
+      S = document.getElementById("s");
+      var r = 5+30*Math.random()
+      addCircle(s,e.offsetX,e.offsetY,r,"red");
+      }
+
+      var s = document.getElementById("s");
+      s.addEventListener("click",clicked);
+      s.addEventListener("click",cClicked);
+    </script>
+  </body>
+</html>
