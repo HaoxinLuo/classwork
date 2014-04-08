@@ -46,3 +46,11 @@ var greetc = _.curry(function(a,b,c){
 var g2 = greetc("My Dear"); //g2("bond")-> 'My Dear Bond'
 var g3 = greetc("Hey","Mrs");//g3('smith')-> 'Hey Mrs smith'
 		  
+
+//****************************************************************************
+var curryMap = _.curry(cull.map);
+var curryFil = _.curry(cull.filter);
+
+var sqlist = curryMap(square);
+var oddList = curryFil(odd);
+var sqodd = _.compose(sqlist,oddList);
